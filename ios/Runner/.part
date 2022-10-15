@@ -1,0 +1,35 @@
+        <Grid item>
+            <StyledQuantity checked={draft.checked}>
+              <CircularProgressCompoment
+                breakApart={true}
+                currentValue={ordersSummary.actualTotalQuantity}
+                total={draft.deal?.available_quantity ?? 0}
+                sizePrimaryCircular={22}
+                thicknessPrimaryCircular={7}
+                colorPrimaryCircular={colorTokens.neutral.ultraLight ?? ''}
+                sizeSecundaryCircular={22}
+                thicknessSecundaryCircular={14}
+                colorSecondaryCircular={colorTokens.primary.deepDark ?? ''}
+                spacingCircle={2}
+                clockwise={false}
+                showProgress={!ordersSummary.ordersCandidatesIsEmpty}
+                sizeIconError={20}
+                quantityLabel={
+                  ordersSummary.ordersCandidatesIsEmpty ? (
+                    <QuantityTypography valid>
+                      {draft.deal?.available_quantity}
+                    </QuantityTypography>
+                  ) : (
+                    <QuantityTypography
+                      valid={!ordersSummary.exceededQuantity}
+                    >{`${ordersSummary.actualTotalQuantity}/${draft.deal?.available_quantity}`}</QuantityTypography>
+                  )
+                }
+                tooltipMessage={
+                  ordersSummary.ordersCandidatesIsEmpty
+                    ? 'Quantidade de SKUs disponíveis'
+                    : 'SKUs utilizadas / SKUs disponíveis'
+                }
+              />
+            </StyledQuantity>
+          </Grid>
